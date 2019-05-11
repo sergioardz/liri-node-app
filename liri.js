@@ -22,16 +22,22 @@ var Spotify = require('node-spotify-api');
 
 // code for function when command is spotify-this-song
 function spotifyThisSong(songName) {
+    // `divider` will be used as a spacer between the tv data we print in log.txt
+    var divider = "\n==============================================================\n\n";
     var spotify = new Spotify(keys.spotify);
     spotify
         .search({ type: 'track', query: songName, limit: 1 })
         .then(function (response) {
             let song = response.tracks.items;
-            var songResults =
-                "Artist: " + song[0].album.artists[0].name +
-                "\nSong: " + song[0].name +
-                "\nSong Link: " + song[0].external_urls.spotify +
-                "\nAlbum: " + song[0].album.name;
+            var songResults = [
+                "Artist: " + song[0].album.artists[0].name,
+                "Song: " + song[0].name,
+                "Song Link: " + song[0].external_urls.spotify,
+                "Album: " + song[0].album.name
+            ].join("\n\n");
+            fs.appendFile("log.txt", songResults + divider, function (err) {
+                if (err) throw err;
+            })
             console.log(songResults);
         })
         .catch(function (err) {
@@ -41,6 +47,8 @@ function spotifyThisSong(songName) {
 
 // code for function when command is concert-this
 function fetchConcert(artistName) {
+    // `divider` will be used as a spacer between the tv data we print in log.txt
+    var divider = "\n==============================================================\n\n";
     var queryUrl = "https://rest.bandsintown.com/artists/" + artistName + "/events?app_id=codingbootcamp";
     axios
         .get(queryUrl)
@@ -52,12 +60,16 @@ function fetchConcert(artistName) {
                     console.log(noInfo);
                 }
                 else {
-                    for (i = 0; i < info.length; i++) {
-                        var concertsResults =
-                            "Result # " + (i + 1) +
-                            "\nName of the venue: " + info[i].venue.name +
-                            "\nVenue location: " + info[i].venue.city + ", " + info[i].venue.region + ", " + info[i].venue.country +
-                            "\nDate of the event: " + moment(info[i].datetime).format('MM/DD/YYYY');
+                    for (i = 1; i < info.length; i++) {
+                        var concertsResults = [
+                            "Result # " + i + " for concert-this band: " + info[i].lineup,
+                            "Name of the venue: " + info[i].venue.name,
+                            "Venue location: " + info[i].venue.city + ", " + info[i].venue.region + ", " + info[i].venue.country,
+                            "Date of the event: " + moment(info[i].datetime).format('MM/DD/YYYY')
+                        ].join("\n\n");
+                        fs.appendFile("log.txt", concertsResults + divider, function (err) {
+                            if (err) throw err;
+                        })
                         console.log(concertsResults);
                     }
                 }
@@ -70,6 +82,8 @@ function fetchConcert(artistName) {
 
 // code for function when command is movie-this
 function fetchMovie(movieName) {
+    // `divider` will be used as a spacer between the tv data we print in log.txt
+    var divider = "\n==============================================================\n\n";
     var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
     axios
         .get(queryUrl)
@@ -82,25 +96,20 @@ function fetchMovie(movieName) {
                 else {
                     var Rotten = "N/A";
                 }
-                var movieResults =
-                    "* Title of the movie: " + info.Title +
-                    "\n* Year the movie came out: " + info.Year +
-                    "\n* IMDB Rating of the movie: " + info.imdbRating +
-                    "\n* Rotten Tomatoes Rating of the movie: " + Rotten +
-                    "\n* Country where the movie was produced: " + info.Country +
-                    "\n* Language(s) of the movie: " + info.Language +
-                    "\n* Plot of the movie: " + info.Plot +
-                    "\n* Actors in the movie: " + info.Actors;
+                var movieResults = [
+                    "* Title of the movie: " + info.Title,
+                    "* Year the movie came out: " + info.Year,
+                    "* IMDB Rating of the movie: " + info.imdbRating,
+                    "* Rotten Tomatoes Rating of the movie: " + Rotten,
+                    "* Country where the movie was produced: " + info.Country,
+                    "* Language(s) of the movie: " + info.Language,
+                    "* Plot of the movie: " + info.Plot,
+                    "* Actors in the movie: " + info.Actors
+                ].join("\n\n");
+                fs.appendFile("log.txt", movieResults + divider, function (err) {
+                    if (err) throw err;
+                })
                 console.log(movieResults);
-                // if (info.Ratings.length > 1) {
-                //     if (info.Ratings[1].Source === "Rotten Tomatoes") {
-                //         console.log(
-                //             "* Rotten Tomatoes Rating of the movie: " + info.Ratings[1].Value);
-                //     }
-                // }
-                // else {
-                //     console.log("--- No Rotten Tomatoes Rating available for " + info.Title + " ---");
-                // }
             }
         )
         .catch(function (error) {
@@ -110,7 +119,7 @@ function fetchMovie(movieName) {
 
 // code for function when command is do-what-it-says
 function doWhatItSays() {
-    fs.readFile('random.txt', 'utf8', function(err, data) {
+    fs.readFile('random.txt', 'utf8', function (err, data) {
         if (err) throw err;
 
         var dataArr = data.split(",");
