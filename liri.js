@@ -4,6 +4,20 @@ require("dotenv").config();
 // code required to import the keys.js file and store it in a variable.
 var keys = require("./keys.js");
 
+// code to fetch query contents with more than 1 word
+var nodeArgs = process.argv;
+
+var queryContent = "";
+
+for (i = 3; i < nodeArgs.length; i++) {
+    if (i > 2 && i < nodeArgs.length) {
+        queryContent = queryContent + "+" + nodeArgs[i];
+    }
+    else {
+        queryContent += nodeArgs[i];
+    }
+}
+
 // npm node-spotify-api
 // Usage with promises
 // This package also optionally works with promises. Just omit the callback parameter and the search method returns a promise object containing the response: 
@@ -16,17 +30,14 @@ function spotifyThisSong(songName) {
     // Making sure that there is a value for the query, and the code is set to show 3 results, while making tests even if the search type is track, is not always fetching the expected results
     if (songName) {
         spotify
-            .search({ type: 'track', query: songName, limit: 3 })
+            .search({ type: 'track', query: songName, limit: 1 })
             .then(function (response) {
                 let song = response.tracks.items;
-                for (i = 0; i < song.length; i++) {
-                    console.log("Result: " + (i + 1) +
-                        "\nArtist: " + song[i].album.artists[0].name +
-                        "\nSong: " + song[i].name +
-                        "\nSong Link: " + song[i].external_urls.spotify +
-                        "\nAlbum: " + song[i].album.name +
-                        "\n----------------------------------------------------------------------------------");
-                }
+                console.log("Artist: " + song[0].album.artists[0].name +
+                    "\nSong: " + song[0].name +
+                    "\nSong Link: " + song[0].external_urls.spotify +
+                    "\nAlbum: " + song[0].album.name +
+                    "\n-----------------------------------------------------------------");
             })
             .catch(function (err) {
                 console.log(err);
@@ -64,4 +75,4 @@ function runApp(argOne, argTwo) {
 }
 
 // calling main function
-runApp(process.argv[2], process.argv[3]);
+runApp(process.argv[2], queryContent);
