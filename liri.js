@@ -4,10 +4,10 @@ require("dotenv").config();
 // code required to import the keys.js file and store it in a variable.
 var keys = require("./keys.js");
 
-// code to require axios package
+// code to require axios package, moment and fs
 var axios = require("axios");
-
 var moment = require("moment");
+var fs = require("fs");
 
 // code to fetch the command option to execute based on arguments
 var term = process.argv[2];
@@ -61,7 +61,6 @@ function fetchConcert(artistName) {
                         console.log(concertsResults);
                     }
                 }
-
             }
         )
         .catch(function (error) {
@@ -77,11 +76,17 @@ function fetchMovie(movieName) {
         .then(
             function (response) {
                 var info = response.data;
+                if (info.Ratings.length > 1) {
+                    var Rotten = info.Ratings[1].Value;
+                }
+                else {
+                    var Rotten = "N/A";
+                }
                 var movieResults =
                     "* Title of the movie: " + info.Title +
                     "\n* Year the movie came out: " + info.Year +
                     "\n* IMDB Rating of the movie: " + info.imdbRating +
-                    "\n* Rotten Tomatoes Rating of the movie: " + info.Ratings[1].Value +
+                    "\n* Rotten Tomatoes Rating of the movie: " + Rotten +
                     "\n* Country where the movie was produced: " + info.Country +
                     "\n* Language(s) of the movie: " + info.Language +
                     "\n* Plot of the movie: " + info.Plot +
@@ -101,6 +106,22 @@ function fetchMovie(movieName) {
         .catch(function (error) {
             console.log(error);
         });
+}
+
+// code for function when command is do-what-it-says
+function doWhatItSays() {
+    fs.readFile('random.txt', 'utf8', function(err, data) {
+        if (err) throw err;
+
+        var dataArr = data.split(",");
+
+        if (dataArr.length === 2) {
+            options(dataArr[0], dataArr[1]);
+        }
+        else if (dataArr.length === 1) {
+            options(dataArr[0]);
+        }
+    })
 }
 
 // code for function to choose a specific command when using the app
@@ -132,6 +153,11 @@ function options(commandData, functionData) {
                 fetchConcert(functionData);
             }
             break;
+        case 'do-what-it-says':
+            doWhatItSays();
+            break;
+        default:
+            console.log("LIRI Bot needs a valid command");
     }
 }
 
