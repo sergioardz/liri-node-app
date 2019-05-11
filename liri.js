@@ -7,7 +7,10 @@ var keys = require("./keys.js");
 // code to require axios package
 var axios = require("axios");
 
-// code to fetch query contents with more than 1 word
+// code to fetch the command option to execute based on arguments
+var term = process.argv[2];
+
+// code to fetch query contents based on arguments
 var queryContent = process.argv.slice(3).join("+");
 
 // npm node-spotify-api
@@ -18,115 +21,72 @@ var Spotify = require('node-spotify-api');
 // code for function when command is spotify this song
 function spotifyThisSong(songName) {
     var spotify = new Spotify(keys.spotify);
-
-    // Making sure that there is a value for the query
-    if (songName) {
-        spotify
-            .search({ type: 'track', query: songName, limit: 1 })
-            .then(function (response) {
-                let song = response.tracks.items;
-                console.log("Artist: " + song[0].album.artists[0].name +
-                    "\nSong: " + song[0].name +
-                    "\nSong Link: " + song[0].external_urls.spotify +
-                    "\nAlbum: " + song[0].album.name);
-            })
-            .catch(function (err) {
-                console.log(err);
-            });
-    }
-    // If there is no query at all, the default song to display is The Sign by Ace of Base
-    else {
-        spotify
-            .search({ type: 'track', query: "The Sign Ace of Base", limit: 1 })
-            .then(function (response) {
-                let song = response.tracks.items;
-                console.log("Artist: " + song[0].album.artists[0].name +
-                    "\nSong: " + song[0].name +
-                    "\nSong Link: " + song[0].external_urls.spotify +
-                    "\nAlbum: " + song[0].album.name);
-            })
-            .catch(function (err) {
-                console.log(err);
-            });
-    }
+    spotify
+        .search({ type: 'track', query: songName, limit: 1 })
+        .then(function (response) {
+            let song = response.tracks.items;
+            console.log("Artist: " + song[0].album.artists[0].name +
+                "\nSong: " + song[0].name +
+                "\nSong Link: " + song[0].external_urls.spotify +
+                "\nAlbum: " + song[0].album.name);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
 }
 
 // code for function when command is movie this
 function fetchMovie(movieName) {
-
-    // Making sure that there is a value for the query
-    if (movieName) {
-        var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
-        axios
-            .get(queryUrl)
-            .then(
-                function (response) {
-                    var info = response.data;
-                    console.log(
-                        "* Title of the movie: " + info.Title +
-                        "\n* Year the movie came out: " + info.Year +
-                        "\n* IMDB Rating of the movie: " + info.imdbRating +
-                        "\n* Country where the movie was produced: " + info.Country +
-                        "\n* Language(s) of the movie: " + info.Language +
-                        "\n* Plot of the movie: " + info.Plot +
-                        "\n* Actors in the movie: " + info.Actors);
-                    if (info.Ratings.length > 1) {
-                        if (info.Ratings[1].Source === "Rotten Tomatoes") {
-                            console.log(
-                                "* Rotten Tomatoes Rating of the movie: " + info.Ratings[1].Value);
-                        }
-                    }
-                    else {
-                        console.log("--- No Rotten Tomatoes Rating available for " + info.Title + " ---");
+    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+    axios
+        .get(queryUrl)
+        .then(
+            function (response) {
+                var info = response.data;
+                console.log(
+                    "* Title of the movie: " + info.Title +
+                    "\n* Year the movie came out: " + info.Year +
+                    "\n* IMDB Rating of the movie: " + info.imdbRating +
+                    "\n* Country where the movie was produced: " + info.Country +
+                    "\n* Language(s) of the movie: " + info.Language +
+                    "\n* Plot of the movie: " + info.Plot +
+                    "\n* Actors in the movie: " + info.Actors);
+                if (info.Ratings.length > 1) {
+                    if (info.Ratings[1].Source === "Rotten Tomatoes") {
+                        console.log(
+                            "* Rotten Tomatoes Rating of the movie: " + info.Ratings[1].Value);
                     }
                 }
-            )
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-    // If there is no query at all, the default movie to display is Mr. Nobody
-    else {
-        var queryUrl = "http://www.omdbapi.com/?t=Mr.+Nobody+&y=&plot=short&apikey=trilogy";
-        axios
-            .get(queryUrl)
-            .then(
-                function (response) {
-                    var info = response.data;
-                    console.log(
-                        "* Title of the movie: " + info.Title +
-                        "\n* Year the movie came out: " + info.Year +
-                        "\n* IMDB Rating of the movie: " + info.imdbRating +
-                        "\n* Country where the movie was produced: " + info.Country +
-                        "\n* Language(s) of the movie: " + info.Language +
-                        "\n* Plot of the movie: " + info.Plot +
-                        "\n* Actors in the movie: " + info.Actors);
-                    if (info.Ratings.length > 1) {
-                        if (info.Ratings[1].Source === "Rotten Tomatoes") {
-                            console.log(
-                                "* Rotten Tomatoes Rating of the movie: " + info.Ratings[1].Value);
-                        }
-                    }
-                    else {
-                        console.log("--- No Rotten Tomatoes Rating available for " + info.Title + " ---");
-                    }
+                else {
+                    console.log("--- No Rotten Tomatoes Rating available for " + info.Title + " ---");
                 }
-            )
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
+            }
+        )
+        .catch(function (error) {
+            console.log(error);
+        });
 }
 
 // code for function to choose a specific command when using the app
 function options(commandData, functionData) {
     switch (commandData) {
         case 'spotify-this-song':
-            spotifyThisSong(functionData);
+            if (!functionData) {
+                functionData = "The Sign Ace of Base";
+                spotifyThisSong(functionData);
+            }
+            else {
+                spotifyThisSong(functionData);
+            }
             break;
         case 'movie-this':
-            fetchMovie(functionData);
+            if (!functionData) {
+                functionData = "Mr. Nobody";
+                fetchMovie(functionData);
+            }
+            else {
+                fetchMovie(functionData);
+            }
             break;
     }
 }
@@ -137,4 +97,4 @@ function runApp(argOne, argTwo) {
 }
 
 // calling main function
-runApp(process.argv[2], queryContent);
+runApp(term, queryContent);
