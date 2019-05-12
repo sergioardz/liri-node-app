@@ -2,9 +2,9 @@
 CLI App - Language Interpretation and Recognition Interface
 
 ### Overview
-LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and Recognition Interface, LIRI is a Language Interpretation and Recognition Interface. LIRI will be a command line node app that takes in parameters and gives you back data.
+LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and Recognition Interface, LIRI is a Language Interpretation and Recognition Interface. LIRI will be a command line node app that takes in parameters and gives you back data.  
 
-    * [Video Demo] (screen-recording.mov)
+    * [Video Demo] (screen-recording.mov)  
 
 ### LIRI Specifics - What the project does
 
@@ -29,14 +29,14 @@ From a user standpoint, LIRI tells you all about concert information for bands, 
 
 ### LIRI for dummies - How users can get started with the project
 Feel free to clone the repo and make sure you install the related node packages included in the package.json file.
-Once this is done, just start using the CLI app by entering any of the following commands preceded by "node liri" and followed with your search
-    * spotify-this-song
-    * movie-this
-    * concert-this
+Once this is done, just start using the CLI app by entering any of the following commands preceded by "node liri" and followed with your search  
+    * spotify-this-song  
+    * movie-this  
+    * concert-this  
 
 ### How does LIRI works? - Where users can get help with your project
 Feel free to explore my code and do not forget to read the documentation on the different packages and APIs mentioned on the LIRI Specifics.
 
 ### Who is the main artist here - Who maintains and contributes to the project
-That would be me: Sergio Rodriguez
+That would be me: Sergio Rodriguez  
 Feel free to contact me through Github!
