@@ -635,3 +635,147 @@ Venue location: Nurnberg, , Germany
 Date of the event: 06/09/2019
 ==============================================================
 
+Result # 1 for concert-this band: Slayer
+
+Name of the venue: Heavy Rock Festival Stadium Restelo
+
+Venue location: Lisbon, , Portugal
+
+Date of the event: 07/05/2019
+==============================================================
+
+Result # 5 for concert-this band: Slayer
+
+Name of the venue: AthensRocks Apostolos Nikolaidis Stadium
+
+Venue location: Athens, , Greece
+
+Date of the event: 07/13/2019
+==============================================================
+
+Result # 6 for concert-this band: Slayer
+
+Name of the venue: CHAOS AB
+
+Venue location: Edmonton, , Canada
+
+Date of the event: 07/26/2019
+==============================================================
+
+Result # 7 for concert-this band: Slayer
+
+Name of the venue: Heavy Montreal (Weekend of July 27-28)
+
+Venue location: Montreal, , Canada
+
+Date of the event: 07/28/2019
+==============================================================
+
+Result # 8 for concert-this band: Slayer
+
+Name of the venue: Wacken Open Air
+
+Venue location: Wacken, , Germany
+
+Date of the event: 08/02/2019
+==============================================================
+
+Result # 9 for concert-this band: Slayer
+
+Name of the venue: Hanns-Martin-Schleyer-Halle
+
+Venue location: Stuttgart, , Germany
+
+Date of the event: 08/03/2019
+==============================================================
+
+Result # 3 for concert-this band: Slayer
+
+Name of the venue: Arenele Romane
+
+Venue location: Bucharest, , Romania
+
+Date of the event: 07/10/2019
+==============================================================
+
+Result # 11 for concert-this band: Slayer
+
+Name of the venue: Coliseo General Rumiñahui
+
+Venue location: Quito, , Ecuador
+
+Date of the event: 09/27/2019
+==============================================================
+
+Result # 12 for concert-this band: Slayer
+
+Name of the venue: Luna Park
+
+Venue location: Buenos Aires City, , Argentina
+
+Date of the event: 09/29/2019
+==============================================================
+
+Result # 13 for concert-this band: Slayer
+
+Name of the venue: Espaço das Américas
+
+Venue location: São Paulo, , Brazil
+
+Date of the event: 10/02/2019
+==============================================================
+
+Result # 14 for concert-this band: Slayer
+
+Name of the venue: Rock In Rio
+
+Venue location: Rio De Janeiro, , Brazil
+
+Date of the event: 10/04/2019
+==============================================================
+
+Result # 15 for concert-this band: Slayer
+
+Name of the venue: Gets Louder Festival
+
+Venue location: Santiago, , Chile
+
+Date of the event: 10/06/2019
+==============================================================
+
+Result # 16 for concert-this band: Slayer
+
+Name of the venue: Great Stage Park - Exit 111 Festival
+
+Venue location: Manchester, TN, United States
+
+Date of the event: 10/11/2019
+==============================================================
+
+Result # 2 for concert-this band: Slayer
+
+Name of the venue: Rock the Castle
+
+Venue location: Vérone, , Italy
+
+Date of the event: 07/07/2019
+==============================================================
+
+Result # 10 for concert-this band: Slayer
+
+Name of the venue: Riot Fest (Weekend of 9/13-15) - Chicago, IL
+
+Venue location: Chicago, IL, United States
+
+Date of the event: 09/13/2019
+==============================================================
+
+Result # 4 for concert-this band: Slayer
+
+Name of the venue: Sofia Airport Park
+
+Venue location: Sofia, , Bulgaria
+
+Date of the event: 07/11/2019
+==============================================================
+
